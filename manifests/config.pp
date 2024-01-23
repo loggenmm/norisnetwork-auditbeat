@@ -33,7 +33,7 @@ class auditbeat::config {
 
   if Integer($auditbeat::major_version) < 8 {
     # Add the 'xpack' section if supported (version >= 6.2.0)
-    if defined($facts['auditbeat_version']){ 
+    if $facts['auditbeat_version'] { 
       if (versioncmp($facts['auditbeat_version'], '7.2.0') >= 0) and ($auditbeat::monitoring) {
         $merged_config = deep_merge($auditbeat_config_temp, {'monitoring' => $auditbeat::monitoring})
       }
